@@ -68,6 +68,10 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "list_books"   # after successful login
+LOGOUT_REDIRECT_URL = "login"       # after logout
+LOGIN_URL = "login"                 # where @login_required redirects
+
 WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 
 
