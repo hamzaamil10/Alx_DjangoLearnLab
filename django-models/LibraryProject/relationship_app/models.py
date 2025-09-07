@@ -11,11 +11,19 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=255)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
+    publication_year = models.PositiveIntegerField(default=2000)
 
     def __str__(self):
         return self.title
+    
+class Meta:
+        permissions = (
+            ("can_add_book", "Can add book (custom)"),
+            ("can_change_book", "Can change book (custom)"),
+            ("can_delete_book", "Can delete book (custom)"),
+        )
 
 
 class Library(models.Model):
