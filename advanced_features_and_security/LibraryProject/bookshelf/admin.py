@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Book
+from .models import Book, CustomUser
+from django.contrib.auth.admin import UserAdmin
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -7,3 +8,11 @@ class BookAdmin(admin.ModelAdmin):
     list_filter = ("publication_year", "author")            # Add sidebar filters
     search_fields = ("title", "author")                     # Add search bar for these fields
 
+@admin.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        ("Additional info", {"fields": ("date_of_birth", "profile_photo")}),
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (None, {"fields": ("date_of_birth", "profile_photo")}),
+    )
