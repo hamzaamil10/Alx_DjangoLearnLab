@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>{% if mode == 'add' %}Add{% else %}Edit{% endif %} Book</title></head>
+<body>
+  <h1>{% if mode == 'add' %}Add{% else %}Edit{% endif %} Book</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if mode == 'add' %}Create{% else %}Save{% endif %}</button>
+  </form>
+  <p><a href="{% url 'list_books' %}">Back to books</a></p>
+</body>
+</html>
