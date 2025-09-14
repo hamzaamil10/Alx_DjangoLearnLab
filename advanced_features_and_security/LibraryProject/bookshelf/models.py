@@ -8,6 +8,13 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author} ({self.publication_year})"
+    class Meta:
+        permissions = (
+            ("can_view", "Can view books (custom)"),
+            ("can_create", "Can create books (custom)"),
+            ("can_edit", "Can edit books (custom)"),
+            ("can_delete", "Can delete books (custom)"),
+        )
     
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -36,3 +43,4 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
