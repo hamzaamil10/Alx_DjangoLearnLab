@@ -3,16 +3,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from .models import Book
 
-# Simple form (adjust fields to your schema)
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ["title", "author", "publication_year"]
 
-# --- LIST (optionally protect with can_view) ---
-# If you want to require viewing permission, uncomment the decorator.
-# @permission_required("relationship_app.can_view", raise_exception=True)
-def list_books(request):
+
+def book_list(request):
     books = Book.objects.select_related("author").all()
     return render(request, "relationship_app/list_books.html", {"books": books})
 
