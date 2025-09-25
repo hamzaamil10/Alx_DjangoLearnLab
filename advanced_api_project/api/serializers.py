@@ -3,7 +3,7 @@ from .models import Author, Book
 import datetime
 
 # BookSerializer: serializes all Book fields, with validation on year.
-class BookSerialize(serializers.ModelSerializer):
+class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
@@ -17,7 +17,7 @@ class BookSerialize(serializers.ModelSerializer):
     
 # AuthorSerializer: serializes author name and nested books list.
 class AuthorSerializer(serializers.ModelSerializer):
-    books = BookSerialize(many=True, read_only=True)
+    books = BookSerializer(many=True, read_only=True)
     class Meta:
         model = Author
         fields = ['name', 'books']
