@@ -24,6 +24,12 @@ class BookCreateView(generics.CreateAPIView):
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticated]  # Only logged-in users
 
+    def perform_create(self, serializer):
+        title = serializer.validated_data.get("title")
+        if Book.objects.filter(title=title).exists():
+            raise serializers.ValidationError("This book already exists.")
+        serializer.save()
+
 
 # 4. UpdateView (PUT/PATCH existing book)
 class BookUpdateView(generics.UpdateAPIView):
